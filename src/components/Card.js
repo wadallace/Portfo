@@ -38,7 +38,6 @@ const Card = ({ title, description, imageSrc }) => {
       </VStack>
     </div>
   )
-  return null
 }
 
 export default Card

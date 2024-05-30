@@ -1,5 +1,5 @@
-import React, { useEffect} from "react"
-import { useFormik } from "formik"
+import React, { useEffect } from "react";
+import { useFormik } from "formik";
 import {
   Box,
   Button,
@@ -12,16 +12,16 @@ import {
   Textarea,
   VStack,
   Spinner,
-} from "@chakra-ui/react"
-import * as Yup from "yup"
-import FullScreenSection from "./FullScreenSection"
-import useSubmit from "../hooks/useSubmit"
-import { useAlertContext } from "../context/alertContext"
+} from "@chakra-ui/react";
+import * as Yup from "yup";
+import FullScreenSection from "./FullScreenSection";
+import useSubmit from "../hooks/useSubmit";
+import { useAlertContext } from "../context/alertContext";
 
 const LandingSection = () => {
-  const { isLoading, response, submit } = useSubmit()
-  const { onOpen } = useAlertContext()
-  
+  const { isLoading, response, submit } = useSubmit();
+  const { onOpen } = useAlertContext();
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -30,7 +30,7 @@ const LandingSection = () => {
       comment: "",
     },
     onSubmit: (values) => {
-      submit('https://example.com/contactme', values);
+      submit("https://example.com/contactme", values);
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -46,38 +46,27 @@ const LandingSection = () => {
         .min(25, "Comment must be at least 25 characters")
         .required("Required"),
     }),
-  })
+  });
   useEffect(() => {
     if (response) {
-      onOpen(response.type, response.message)
-      if (response.type === 'success') {
+      onOpen(response.type, response.message);
+      if (response.type === "success") {
         formik.resetForm();
+      }
     }
-  }
-  }, [response] )
+  }, [response]);
   return (
     <FullScreenSection
       isDarkBackground
-      backgroundColor='#512DA8'
+      backgroundColor="#512DA8"
       py={16}
       spacing={8}
     >
-      <VStack
-        w='1024px'
-        p={32}
-        alignItems='flex-start'
-      >
-        <Heading
-          as='h1'
-          id='contactme-section'
-        >
+      <VStack w="1024px" p={32} alignItems="flex-start">
+        <Heading as="h1" id="contactme-section">
           Contact me
         </Heading>
-        <Box
-          p={6}
-          rounded='md'
-          w='100%'
-        >
+        <Box p={6} rounded="md" w="100%">
           <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
               <FormControl
@@ -85,10 +74,10 @@ const LandingSection = () => {
                   formik.touched.firstName && !!formik.errors.firstName
                 }
               >
-                <FormLabel htmlFor='firstName'>Name</FormLabel>
+                <FormLabel htmlFor="firstName">Name</FormLabel>
                 <Input
-                  id='firstName'
-                  name='firstName'
+                  id="firstName"
+                  name="firstName"
                   {...formik.getFieldProps("firstName")}
                 />
 
@@ -97,36 +86,32 @@ const LandingSection = () => {
               <FormControl
                 isInvalid={formik.touched.email && !!formik.errors.email}
               >
-                <FormLabel htmlFor='email'>Email Address</FormLabel>
+                <FormLabel htmlFor="email">Email Address</FormLabel>
                 <Input
-                  id='email'
-                  name='email'
-                  type='email'
+                  id="email"
+                  name="email"
+                  type="email"
                   {...formik.getFieldProps("email")}
                 />
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
               <FormControl>
-                <FormLabel htmlFor='type'>Type of enquiry</FormLabel>
-                <Select
-                  id='type'
-                  name='type'
-                  {...formik.getFieldProps("type")}
-                >
-                  <option value='hireMe'>Freelance project proposal</option>
-                  <option value='openSource'>
+                <FormLabel htmlFor="type">Type of enquiry</FormLabel>
+                <Select id="type" name="type" {...formik.getFieldProps("type")}>
+                  <option value="hireMe">Freelance project proposal</option>
+                  <option value="openSource">
                     Open source consultancy session
                   </option>
-                  <option value='other'>Other</option>
+                  <option value="other">Other</option>
                 </Select>
               </FormControl>
               <FormControl
                 isInvalid={formik.touched.comment && !!formik.errors.comment}
               >
-                <FormLabel htmlFor='comment'>Your message</FormLabel>
+                <FormLabel htmlFor="comment">Your message</FormLabel>
                 <Textarea
-                  id='comment'
-                  name='comment'
+                  id="comment"
+                  name="comment"
                   height={250}
                   {...formik.getFieldProps("comment")}
                 />
@@ -135,11 +120,7 @@ const LandingSection = () => {
               {isLoading ? (
                 <Spinner />
               ) : (
-                <Button
-                  type='submit'
-                  colorScheme='purple'
-                  width='full'
-                >
+                <Button type="submit" colorScheme="purple" width="full">
                   Submit
                 </Button>
               )}
@@ -148,7 +129,7 @@ const LandingSection = () => {
         </Box>
       </VStack>
     </FullScreenSection>
-  )
-}
+  );
+};
 
-export default LandingSection
+export default LandingSection;

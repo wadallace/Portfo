@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import {
@@ -92,13 +92,13 @@ const Header = () => {
             <HStack spacing={8}>
               {/* Add links to Projects and Contact me section */}
               <a
-                href='#projects'
+                href={'#projects'}
                 onClick={handleClick("projects")}
               >
                 Projects
               </a>
               <a
-                href='#contact-me'
+                href={'#contact-me'}
                 onClick={handleClick("contactme")}
               >
                 Contact Me
